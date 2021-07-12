@@ -1,24 +1,42 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Home from './components/pages/HomePage/Home';
+import About from './components/pages/AboutPage/About';
+import Contact from './components/pages/ContactPage/Contact';
+import Gallery from './components/pages/GalleryPage/Gallery';
+import { BrowserRouter as Router, Switch, Route ,Redirect} from 'react-router-dom';
+import Navbar from './components/organisms/Navbar';
+import Footer from './components/organisms/Footer';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+
+  footer : {
+    marginTop:'30px'
+  }
+});
 
 function App() {
+
+  const styles = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Switch>
+
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
+
+        <Route path='/home' component={Home} />
+        <Route path='/about' component={About} />
+        <Route path='/contact' component={Contact} />
+        <Route path='/gallery' component={Gallery} />
+      </Switch>
+      <br /> <br /> <br /> <br />
+      <Footer className= {styles.footer}/>
+    </Router>
   );
 }
 
